@@ -118,7 +118,7 @@ const HasPosition = styled(({ address, className }) => {
           </Stat>
           <Button
             className='prev-unstake'
-            // disabled={!+position?.oldStaked}
+            disabled={!+position?.oldStaked}
             onClick={() => Modal.open(<Pool.Unstake address={address} prevStaked={true} />)}
           >
             Unstake
