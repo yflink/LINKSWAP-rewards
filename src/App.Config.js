@@ -142,7 +142,8 @@ export const Networks = {
             currencyKey: 'link',
           },
           address: '0xf68c01198cDdEaFB9d2EA43368FC9fA509A339Fa',
-          rewardsAddress: '0x5662E09d064781Cf2E98732ec3fC7A4a4aB67eA5',
+          rewardsAddress: '0x9667947B67199C91c109Be912807190cc490A2A3',
+          oldRewardsAddress: '0x5662E09d064781Cf2E98732ec3fC7A4a4aB67eA5',
           liqudityUrl:
             'https://linkswap.app/#/add/0x514910771AF9Ca656af840dff83E8264EcF986CA/0x63b4f3e3fa4e438698CE330e365E831F7cCD1eF4',
         },

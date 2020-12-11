@@ -75,6 +75,13 @@ const hydration = {
       fields.contracts.pool = new web3.eth.Contract(LinkSwapLPToken, poolAddress);
       fields.contracts.stakingRewards = new web3.eth.Contract(StakingRewards, pool.rewardsAddress);
 
+      if (pool.oldRewardsAddress) {
+        fields.contracts.oldStakingRewards = new web3.eth.Contract(
+          StakingRewards,
+          pool.oldRewardsAddress
+        );
+      }
+
       fields.periodFinish = await fields.contracts.stakingRewards.methods.periodFinish().call();
       fields.totalSupply = await fields.contracts.stakingRewards.methods.totalSupply().call();
 
@@ -153,16 +160,23 @@ const hydration = {
 
       const position = {
         balance: 0,
+        oldStaked: 0,
         staked: 0,
         reward: {},
       };
 
       const StakingRewardsContract = contracts?.stakingRewards;
+      const oldStakingRewardsContract = contracts?.oldStakingRewards;
       const PoolContract = contracts?.pool;
       const accountAddress = state.account?.address;
 
       if (!StakingRewardsContract || !PoolContract || !accountAddress) return;
 
+      if (oldStakingRewardsContract) {
+        position.oldStaked = await oldStakingRewardsContract.methods
+          .balanceOf(accountAddress)
+          .call();
+      }
       position.balance = await PoolContract.methods.balanceOf(accountAddress).call();
       position.staked = await StakingRewardsContract.methods.balanceOf(accountAddress).call();
       position.reward.yfl = await StakingRewardsContract.methods.earned(accountAddress, 0).call();

@@ -8,10 +8,10 @@ const Button = styled(({ loading, children, className, ...rest }) => {
   // make sure all children are wrapped in a node
   const warppedChildren = React.Children.map(children, (child) =>
     typeof child === 'string' ? (
-      <span className="-button-wrapped-string-child">{child}</span>
+      <span className='-button-wrapped-string-child'>{child}</span>
     ) : (
       child
-    ),
+    )
   );
 
   const El = rest?.href ? 'a' : 'button';
@@ -23,7 +23,7 @@ const Button = styled(({ loading, children, className, ...rest }) => {
       {...omit(rest, ['compact', 'large', 'inline', 'heavy', 'action', 'strong'])}
     >
       {warppedChildren}
-      {loading === true && <IconSpinner animate="spin" />}
+      {loading === true && <IconSpinner animate='spin' />}
     </El>
   );
 })`
@@ -36,7 +36,7 @@ const Button = styled(({ loading, children, className, ...rest }) => {
   padding: 0.8em 0.7em;
   border: none;
   color: currentColor;
-  background: #55616E;
+  background: #55616e;
   font-size: var(--theme--button--font-size, 16px);
   letter-spacing: 0.05em;
   border-radius: var(--theme--border-radius--small);
@@ -129,7 +129,7 @@ Button.Icon = styled(({ icon, className, ...rest }) => (
   margin: 0;
   display: block;
   border-radius: 6px;
-  background: #55616E;
+  background: #55616e;
 
   > svg {
     font-size: 1em;

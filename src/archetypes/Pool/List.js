@@ -16,8 +16,8 @@ export default styled(({ children, ...props }) => {
       <article>
         {Object.values(state.pool || {}).length <= 0 ? (
           <Status
-            icon={<LogoYFLink animate="logospin" />}
-            title="Loading pools"
+            icon={<LogoYFLink animate='logospin' />}
+            title='Loading pools'
             small
             style={{ opacity: 0.5 }}
           />

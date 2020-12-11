@@ -112,12 +112,14 @@ export const useStakingTransaction = ({ address, onSuccess }) => {
 };
 
 // unstake signature: [amount]
-export const useUnstakingTransaction = ({ address, onSuccess }) => {
+export const useUnstakingTransaction = ({ address, onSuccess, prevStaked }) => {
   const { state } = AppStore();
 
   const transaction = Transaction.useTokenTransaction({
     abi: StakingRewards,
-    address: state.pool[address].rewardsAddress,
+    address: prevStaked
+      ? state.pool[address].oldRewardsAddress
+      : state.pool[address].rewardsAddress,
     method: 'unstake',
     params: ['amount'],
     controls: {

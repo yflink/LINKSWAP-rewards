@@ -12,9 +12,9 @@ import { ReactComponent as LogoMetaMask } from '@logo/metamask.svg';
 const LoadingPosition = ({ className }) => (
   <Panel className={className}>
     <Status
-      icon={<LogoYFLink animate="logospin" />}
-      title="Loading position"
-      info="Loading your position in this pool"
+      icon={<LogoYFLink animate='logospin' />}
+      title='Loading position'
+      info='Loading your position in this pool'
       //link={<a href="https://etherscan.io" target="_blank">View transaction</a>}
       small
     />
@@ -27,14 +27,14 @@ const NoPosition = ({ address, className }) => {
   return (
     <Panel
       className={className}
-      subtitle="Get started by acquiring LINKSWAP Liquidity tokens"
+      subtitle='Get started by acquiring LINKSWAP Liquidity tokens'
       loose
     >
       <p>
         LINKSWAP LP tokens are required. Once you've added liquidity to the {pool?.token0?.symbol}-
         {pool?.token1?.symbol} pool you can stake your liquidity tokens on this page.
       </p>
-      <Button status="neutral" href={pool?.liqudityUrl} target="_blank" rel="noopener noreferrer">
+      <Button status='neutral' href={pool?.liqudityUrl} target='_blank' rel='noopener noreferrer'>
         Add {`${pool?.token0?.symbol}-${pool?.token1?.symbol}`} liquidity
       </Button>
     </Panel>
@@ -56,8 +56,8 @@ const HasPosition = styled(({ address, className }) => {
     <Panel className={className}>
       <span>
         <Stat
-          title="LINKSWAP LP Balance"
-          //info={`≈ ${format.currency(fiat_balance)}`}
+          title='LINKSWAP LP Balance'
+          // info={`≈ ${format.currency(fiat_balance)}`}
           large
         >
           <LazyBoi
@@ -70,7 +70,7 @@ const HasPosition = styled(({ address, className }) => {
 
       <span>
         <Stat
-          title="Currently Staked"
+          title='Currently Staked'
           //info={`≈ ${format.currency(fiat_staked)}`}
           large
         >
@@ -86,7 +86,7 @@ const HasPosition = styled(({ address, className }) => {
 
       <span>
         <Stat
-          title="Unclaimed YFL"
+          title='Unclaimed YFL'
           //info={`≈ ${format.currency(fiat_rewards_yfl)}`}
           large
         >
@@ -102,6 +102,29 @@ const HasPosition = styled(({ address, className }) => {
           {position?.reward?.ert ? 'Claim All' : 'Claim'}
         </Button>
       </span>
+
+      {pool?.address === '0xf68c01198cDdEaFB9d2EA43368FC9fA509A339Fa' && (
+        <span>
+          <Stat
+            title='Previously Staked'
+            //info={`≈ ${format.currency(fiat_staked)}`}
+            prevStaked={true}
+            large
+          >
+            <LazyBoi
+              value={position?.oldStaked}
+              format={(val) => format.maxDB(units.fromWei(val), 5)}
+            />
+          </Stat>
+          <Button
+            className='prev-unstake'
+            // disabled={!+position?.oldStaked}
+            onClick={() => Modal.open(<Pool.Unstake address={address} prevStaked={true} />)}
+          >
+            Unstake
+          </Button>
+        </span>
+      )}
 
       {position?.reward?.ert && (
         <span>
@@ -121,12 +144,18 @@ const HasPosition = styled(({ address, className }) => {
   );
 })`
   .panel-content {
+    flex-grow: 1;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: flex-end;
 
     > span {
       width: 33%;
+      height: 100%;
+
+      .prev-unstake {
+        color: #ff3532;
+      }
     }
   }
 
@@ -138,10 +167,10 @@ const HasPosition = styled(({ address, className }) => {
 const NotConnected = styled(({ className }) => (
   <Panel className={className} loose>
     <Status
-      icon={<LogoMetaMask defaultcolor="true" />}
-      title="Not Connected"
-      info="Connect metamask to view your position"
-      link={<Account.Button compact text="Connect Metamask" />}
+      icon={<LogoMetaMask defaultcolor='true' />}
+      title='Not Connected'
+      info='Connect metamask to view your position'
+      link={<Account.Button compact text='Connect Metamask' />}
       small
     />
   </Panel>
@@ -203,35 +232,35 @@ export default styled(({ address, className, yfl }) => {
   const stake = Pool.useUserStake(address);
 
   let ertSymbol;
-  if (pool?.token0?.symbol === 'WETH' || pool?.token0?.symbol === 'LINK' ) {
-    ertSymbol = pool?.token1?.symbol
+  if (pool?.token0?.symbol === 'WETH' || pool?.token0?.symbol === 'LINK') {
+    ertSymbol = pool?.token1?.symbol;
   } else {
-    ertSymbol = pool?.token0?.symbol
+    ertSymbol = pool?.token0?.symbol;
   }
 
   return (
     <Panel className={`pool-row ${className}`} data-open={open}>
       <div className={'pool-details'} onClick={() => toggleOpen()}>
-        <span className="title-col">
+        <span className='title-col'>
           <Pool.Name address={address} />
-          <Stat inline small light className="countdown">
-            <Countdown prefix="Ends in: " to={pool?.periodFinish} />
+          <Stat inline small light className='countdown'>
+            <Countdown prefix='Ends in: ' to={pool?.periodFinish} />
           </Stat>
         </span>
 
-        <span className="stats-group">
+        <span className='stats-group'>
           <span>
-            <Stat title="Total Deposited">
+            <Stat title='Total Deposited'>
               <LazyBoi value={deposited} format={(val) => format.currency(val)} />
             </Stat>
           </span>
           <span>
-            <Stat title="Pool Rate">
+            <Stat title='Pool Rate'>
               <div>
                 <LazyBoi
                   value={pool?.reward?.yfl?.rate}
                   format={(val) => format.decimals(units.fromWei(val), 6)}
-                  suffix={<span className="suffix"> YFL/day</span>}
+                  suffix={<span className='suffix'> YFL/day</span>}
                 />
               </div>
               {pool?.reward?.ert && (
@@ -239,21 +268,21 @@ export default styled(({ address, className, yfl }) => {
                   <LazyBoi
                     value={pool?.reward?.ert?.rate}
                     format={(val) => format.decimals(units.fromWei(val), 6)}
-                    suffix={<span className="suffix"> {ertSymbol}/day</span>}
+                    suffix={<span className='suffix'> {ertSymbol}/day</span>}
                   />
                 </div>
               )}
             </Stat>
           </span>
           <span>
-            <Stat title="My Stake">
+            <Stat title='My Stake'>
               <LazyBoi value={stake} format={(val) => format.currency(val)} />
             </Stat>
           </span>
         </span>
 
         <span>
-          <Button.Icon icon={<IconChevron />} className="toggle" onClick={() => toggleOpen()} />
+          <Button.Icon icon={<IconChevron />} className='toggle' onClick={() => toggleOpen()} />
         </span>
       </div>
       <UserPositionPanel address={address} open={open} />

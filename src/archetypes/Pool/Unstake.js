@@ -13,22 +13,30 @@ export default styled(({ address, ...props }) => {
   const tx = Pool.useUnstakingTransaction({
     address,
     onSuccess: () => hydrate('pool.values', address),
+    prevStaked: props.prevStaked,
   });
 
   return (
     <ModalTemplate address={address} {...props} title={'Unstake'}>
       <Panel disabled={['UNAPPROVED', 'UNCONFIRMED'].includes(tx.status)}>
         <Field.Number
-          title={`Currently Staked: ${units.fromWei(position?.staked)}`}
+          title={`Currently Staked: ${units.fromWei(
+            props.prevStaked ? position?.oldStaked : position?.staked
+          )}`}
           info={
-            <Pill status={'neutral'} onClick={() => tx?.setParam('amount', position?.staked)}>
+            <Pill
+              status={'neutral'}
+              onClick={() =>
+                tx?.setParam('amount', props.prevStaked ? position?.oldStaked : position?.staked)
+              }
+            >
               MAX
             </Pill>
           }
           value={units.fromWei(tx?.params?.amount || 0)}
           onChange={(amt) => tx?.setParam('amount', units.toWei(amt))}
           min={0}
-          max={units.fromWei(position?.staked)}
+          max={units.fromWei(props.prevStaked ? position?.oldStaked : position?.staked)}
         />
 
         <Panel.Footer>{tx.controls}</Panel.Footer>

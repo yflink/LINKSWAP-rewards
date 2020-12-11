@@ -2,13 +2,20 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { omit } from 'lodash';
 
-const Stat = styled(({ title, info, children, className, ...rest }) => {
+const Stat = styled(({ title, info, children, className, prevStaked, ...rest }) => {
   const [loading, setloading] = useState(false);
+  const [redStyle, setRedStyle] = useState('');
 
   useEffect(() => {
     setloading(true);
     setTimeout(() => setloading(false), 500);
   }, [children]); // eslint-disable-line
+
+  useEffect(() => {
+    if (prevStaked) {
+      setRedStyle('red');
+    }
+  }, [prevStaked]);
 
   return (
     <div
@@ -16,10 +23,10 @@ const Stat = styled(({ title, info, children, className, ...rest }) => {
       data-loading={loading}
       {...omit(rest, ['light', 'inline', 'small', 'large'])}
     >
-      <span className="stat-title">{title}</span>
-      <span className="stat-value">
+      <span className={`stat-title ${redStyle}`}>{title}</span>
+      <span className={`stat-value ${redStyle}`}>
         <span>{children}</span>
-        <span className="stat-value-info">{info}</span>
+        <span className='stat-value-info'>{info}</span>
       </span>
     </div>
   );
@@ -37,6 +44,10 @@ const Stat = styled(({ title, info, children, className, ...rest }) => {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  > .red {
+    color: #ff3532;
   }
 
   > .stat-title {

@@ -77,6 +77,8 @@ Panel.Content = styled(({ title, subtitle, children, className, ...props }) => (
     {children}
   </div>
 ))`
+  height: 100%;
+
   > h1 {
     font-size: var(--theme--panel--title--font-size, 24px);
     color: var(--theme--panel--title--color, white);
