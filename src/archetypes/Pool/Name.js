@@ -23,7 +23,7 @@ export default styled(({ address, subtitle, className, ...rest }) => {
   align-items: center;
   border-radius: var(--theme--border-radius);
   font-size: var(--font-size-normal);
-  width: 250px;
+  width: 100%;
 
   .pool-symbol {
     margin-right: 0.4em;

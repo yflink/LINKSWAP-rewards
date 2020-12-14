@@ -283,7 +283,6 @@ const UserPositionPanel = styled(({ address, open, className }) => {
     return <NotConnected className={className} />;
   }
 })`
-  max-height: 20rem;
   overflow: hidden;
   background: rgba(0, 0, 0, 0.3) !important;
   margin-top: 2rem;
@@ -388,14 +387,13 @@ export default styled(({ address, className, yfl }) => {
     //margin-top: 1rem;
 
     .title-col {
-      width: auto;
+      width: 50%;
 
       .pool-name {
         padding: 1.8rem 2.4rem 1.8rem 2rem;
         background: rgba(255, 255, 255, 0.1);
         margin-bottom: 0.9rem;
         display: inline-flex;
-        min-width: 20rem;
       }
 
       .countdown {
@@ -404,14 +402,14 @@ export default styled(({ address, className, yfl }) => {
     }
 
     .stats-group {
-      display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      width: 71%;
+      width: 100%;
 
       > span {
-        margin-left: 16px;
-        width: 33%;
+        margin-left: 10%;
+        margin-bottom: 20px;
+        float: left;
       }
     }
 
@@ -445,5 +443,13 @@ export default styled(({ address, className, yfl }) => {
   &:hover {
     z-index: 2;
     background: #445363;
+  }
+
+  // Block has been added to handle pool name panel only if the browser size is 470px or less
+  @media (max-width: 470px) {
+    .pool-name
+    {
+      display:block!important;
+    }
   }
 `;
