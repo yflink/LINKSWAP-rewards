@@ -169,53 +169,26 @@ const HasPosition = styled(({ address, className }) => {
           </Button>
         </span>
       )}
-      {pool?.address === '0xf68c01198cDdEaFB9d2EA43368FC9fA509A339Fa' &&
-        position?.reward?.ert && ( // Show CFI instead of YFL for CFI/LINK pool
-          <span>
-            <Stat
-              title={`Unclaimed CFi`}
-              //info={`≈ ${format.currency(fiat_rewards_ert)}`}
-              large
-            >
-              <LazyBoi
-                value={position?.reward?.ert}
-                format={(val) => format.maxDB(units.fromWei(val), 5)}
-              />
-            </Stat>
-            <Button
-              disabled={!+position?.reward?.ert}
-              onClick={() => Modal.open(<Pool.Claim address={address} />)}
-            >
-              {position?.reward?.ert ? 'Claim All' : 'Claim'}
-            </Button>
-          </span>
-        )}
-      {(pool?.address === '0x37CeE65899dA4B1738412814155540C98DFd752C' ||
-        pool?.address === '0xdef0CEF53E0D4c6A5E568c53EdCf45CeB33DBE46') &&
-        position?.reward?.ert && ( // Show MASQ as well as YFL for MASQ/ETH pool's reward
-          <span>
-            <Stat
-              title={
-                pool?.address === '0x37CeE65899dA4B1738412814155540C98DFd752C'
-                  ? `Unclaimed MASQ`
-                  : 'Unclaimed GSWAP'
-              }
-              //info={`≈ ${format.currency(fiat_rewards_ert)}`}
-              large
-            >
-              <LazyBoi
-                value={position?.reward?.ert}
-                format={(val) => format.maxDB(units.fromWei(val), 5)}
-              />
-            </Stat>
-            <Button
-              disabled={!+position?.reward?.ert}
-              onClick={() => Modal.open(<Pool.Claim address={address} />)}
-            >
-              {position?.reward?.ert ? 'Claim All' : 'Claim'}
-            </Button>
-          </span>
-        )}
+      {position?.reward?.ert && ( // Show MASQ as well as YFL for MASQ/ETH pool's reward
+        <span>
+          <Stat
+            title={`Unclaimed ${pool?.reward?.ert?.symbol}`}
+            //info={`≈ ${format.currency(fiat_rewards_ert)}`}
+            large
+          >
+            <LazyBoi
+              value={position?.reward?.ert}
+              format={(val) => format.maxDB(units.fromWei(val), 5)}
+            />
+          </Stat>
+          <Button
+            disabled={!+position?.reward?.ert}
+            onClick={() => Modal.open(<Pool.Claim address={address} />)}
+          >
+            {position?.reward?.ert ? 'Claim All' : 'Claim'}
+          </Button>
+        </span>
+      )}
     </Panel>
   );
 })`
