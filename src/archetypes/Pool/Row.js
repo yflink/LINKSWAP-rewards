@@ -306,13 +306,6 @@ export default styled(({ address, className, yfl }) => {
   const deposited = Pool.useDeposited(address);
   const stake = Pool.useUserStake(address);
 
-  let ertSymbol;
-  if (pool?.token0?.symbol === 'WETH' || pool?.token0?.symbol === 'LINK') {
-    ertSymbol = pool?.token1?.symbol;
-  } else {
-    ertSymbol = pool?.token0?.symbol;
-  }
-
   return (
     <Panel className={`pool-row ${className}`} data-open={open}>
       <div className={'pool-details'} onClick={() => toggleOpen()}>
@@ -350,7 +343,11 @@ export default styled(({ address, className, yfl }) => {
                     format={(val) =>
                       format.decimals(units.fromWei(val) * 86400, 6)
                     }
-                    suffix={<span className='suffix'> {ertSymbol}/day</span>}
+                    suffix={
+                      <span className='suffix'>
+                        {`${pool?.reward?.ert?.symbol}/day`}
+                      </span>
+                    }
                   />
                 </div>
               )}
