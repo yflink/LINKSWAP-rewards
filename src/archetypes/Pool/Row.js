@@ -66,30 +66,6 @@ const HasPosition = styled(({ address, className }) => {
   //const fiat_rewards_yfl = useConversion(units.fromWei(position?.reward?.yfl), 'yflink', 'usd')
   //const fiat_rewards_ert = useConversion(units.fromWei(position?.reward?.ert), 'yflink', 'usd')
 
-  if (
-    pool?.address === '0xf68c01198cDdEaFB9d2EA43368FC9fA509A339Fa' &&
-    position?.reward?.ert
-  ) {
-    console.log(
-      'CFI --- :',
-      pool?.token0?.symbol,
-      pool?.token1?.symbol,
-      position?.reward?.ert
-    );
-  }
-
-  if (
-    pool?.address === '0x37CeE65899dA4B1738412814155540C98DFd752C' &&
-    position?.reward?.ert
-  ) {
-    console.log(
-      'MASQ --- :',
-      pool?.token0?.symbol,
-      pool?.token1?.symbol,
-      position?.reward?.ert
-    );
-  }
-
   return (
     <Panel className={className}>
       <span>
@@ -313,9 +289,12 @@ export default styled(({ address, className, yfl }) => {
                 <div>
                   <LazyBoi
                     value={pool?.reward?.ert?.rate}
-                    format={(val) =>
-                      format.decimals(units.fromWei(val) * 86400, 6)
-                    }
+                    format={(val) => {
+                      if (pool?.reward?.ert?.symbol === 'CEL') {
+                        return format.decimals((val / 10000) * 86400, 6);
+                      }
+                      return format.decimals(units.fromWei(val) * 86400, 6);
+                    }}
                     suffix={
                       <span className='suffix'>
                         {`${pool?.reward?.ert?.symbol}/day`}
