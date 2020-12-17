@@ -447,17 +447,15 @@ export default styled(({ address, className, yfl }) => {
 
   // Block has been added to handle pool panel only if the browser size is 500px or less
   @media (max-width: 500px) {
-    .pool-name
-    {
-      display:block!important;
+    .pool-name {
+      display: block !important;
     }
     .button-action // Hide arrows since the panel box is already clickable
     {
-      display:none;
+      display: none;
     }
-    .suffix
-    {
-      display:flex;
+    .suffix {
+      display: flex;
     }
   }
 `;
