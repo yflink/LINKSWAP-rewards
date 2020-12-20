@@ -4,6 +4,7 @@ import { Pill } from "@components";
 import { Account } from "@archetypes";
 import { ReactComponent as LogoFull } from "@logo/yflink-full.svg";
 import { ReactComponent as Logo } from "@logo/yflink.svg";
+import {isMobile} from 'react-device-detect';
 
 const StyledLink = styled(({ href, children, className, ...props }) => (
   <a href={href} className={`header-link ${className}`} {...props}>
@@ -35,6 +36,7 @@ export default styled(({ className }) => (
     <StyledLink href="https://yflink.io" className="brand">
       <LogoFull className="logo" defaultcolor="true" />
     </StyledLink>
+    {!isMobile && (
     <span className="links">
       <StyledLink href="https://yflink.io/#/stake" target="_blank">
         Stake & Vote
@@ -51,6 +53,7 @@ export default styled(({ className }) => (
         wap
       </StyledLink>
     </span>
+    )}
     <span className="account">
       <Account.Balance />
       <Account.Button />
