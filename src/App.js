@@ -25,7 +25,7 @@ const LearnPanel = () => (
 const Layout = hot((props) => (
   <Fragment>
     <GlobalStyle />
-    <Centered title="Linkswap LP Rewards" {...props}>
+    <Centered title="LINKSWAP LP Rewards" {...props}>
       {/* <LearnPanel/>
 				<Spacer invisible/> */}
       <Pool.Index />
