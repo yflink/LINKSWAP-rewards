@@ -2,7 +2,7 @@ import Web3 from 'web3';
 import { find } from 'lodash';
 import { Notification } from '@components';
 import Store from '@util/store';
-import { LinkSwapLPToken, ERC20, StakingRewards } from '@util/contracts';
+import { LINKSWAPLPToken, ERC20, StakingRewards } from '@util/contracts';
 import { Networks } from '@app/App.Config';
 
 const ethereum = window.ethereum;
@@ -78,7 +78,7 @@ const hydration = {
 
       // contracts
       fields.contracts.pool = new web3.eth.Contract(
-        LinkSwapLPToken,
+        LINKSWAPLPToken,
         poolAddress
       );
       fields.contracts.stakingRewards = new web3.eth.Contract(
@@ -295,7 +295,7 @@ const triggers = {
         );
     },
     fetchTokenBalance: async ({ state, set }, address) => {
-      const contract = new web3.eth.Contract(LinkSwapLPToken, address);
+      const contract = new web3.eth.Contract(LINKSWAPLPToken, address);
       contract.methods
         .balanceOf(state.account?.address)
         .call()
