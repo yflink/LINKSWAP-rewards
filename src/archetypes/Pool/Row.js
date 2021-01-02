@@ -154,7 +154,12 @@ const HasPosition = styled(({ address, className }) => {
           >
             <LazyBoi
               value={position?.reward?.ert}
-              format={(val) => format.maxDB(units.fromWei(val), 5)}
+              format={(val) => {
+                if (position?.reward?.ert?.symbol === 'CEL') {
+                  return format.decimals(val * (10 ** 14), 5);
+                }
+                return format.maxDB(units.fromWei(val), 5);
+              }}
             />
           </Stat>
           <Button
