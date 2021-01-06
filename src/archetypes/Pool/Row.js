@@ -155,7 +155,7 @@ const HasPosition = styled(({ address, className }) => {
             <LazyBoi
               value={position?.reward?.ert}
               format={(val) => {
-                if (position?.reward?.ert?.symbol === 'CEL') {
+                if (pool?.reward?.ert?.symbol === 'CEL') {
                   return format.maxDB(val / 10000, 5);
                 }
                 return format.maxDB(units.fromWei(val), 5);
