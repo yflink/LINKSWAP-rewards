@@ -33,7 +33,6 @@ export const usePosition = (address) => {
 export const useDeposited = (address) => {
   const [data, setData] = useState();
   const pool = usePool(address);
-
   const token0Rate = useConversion(1, pool?.token0?.currencyKey, 'usd');
   const token1Rate = useConversion(1, pool?.token1?.currencyKey, 'usd');
 

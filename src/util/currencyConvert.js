@@ -15,6 +15,8 @@ const coinGeckoMapper = {
   cel: 'celsius-degree-token',
   yax: 'yaxis',
   cfi: 'cyberfi',
+  azuki: 'azuki',
+  doki: 'doki',
 };
 
 const useRate = (from, to) => {

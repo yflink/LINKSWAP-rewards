@@ -295,7 +295,7 @@ export default styled(({ address, className, yfl }) => {
                   <LazyBoi
                     value={pool?.reward?.yfl?.rate}
                     format={(val) =>
-                      format.decimals(units.fromWei(val) * 86400, 6)
+                      format.decimals(units.fromWei(val) * 86400, 2)
                     }
                     suffix={<span className='suffix'> YFL/day</span>}
                   />
@@ -307,9 +307,9 @@ export default styled(({ address, className, yfl }) => {
                     value={pool?.reward?.ert?.rate}
                     format={(val) => {
                       if (pool?.reward?.ert?.symbol === 'CEL') {
-                        return format.decimals((val / 10000) * 86400, 6);
+                        return format.decimals((val / 10000) * 86400, 2);
                       }
-                      return format.decimals(units.fromWei(val) * 86400, 6);
+                      return format.decimals(units.fromWei(val) * 86400, 2);
                     }}
                     suffix={
                       <span className='suffix'>
@@ -367,14 +367,22 @@ export default styled(({ address, className, yfl }) => {
     }
 
     .stats-group {
-      justify-content: space-between;
+      justify-content: flex-start;
       align-items: flex-start;
       width: 100%;
+      display: flex;
 
       > span {
-        margin-left: 10%;
+        margin-left: 20px;
         margin-bottom: 20px;
-        float: left;
+        float: left; 
+        flex: 0 0 150px;
+        
+        &:last-child {
+          float: right;
+          margin: 0 20px 20px;
+          flex: 1;
+        }
       }
     }
 
@@ -410,6 +418,26 @@ export default styled(({ address, className, yfl }) => {
     background: #445363;
   }
 
+  @media (max-width: 850px) {
+    .pool-details {
+      .stats-group {
+        width: 100%;
+        display: block;
+  
+        > span {
+          margin-left: 20px;
+          margin-bottom: 20px;
+          float: left;
+          
+          &:last-child {
+            float: left;
+            margin: 0 0 20px 20px;
+          }
+        }
+      }
+    }
+  }
+
   @media (max-width: 500px) {
     .pool-details {
       flex-wrap: wrap;
@@ -431,7 +459,12 @@ export default styled(({ address, className, yfl }) => {
         
         > span {
           width: 100%;
-          margin-left: 0; 
+          margin: 0 0 20px;
+          
+          &:last-child {
+            float: left;
+            margin: 0 0 20px;
+          }
         }
       }
       

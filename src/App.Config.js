@@ -173,7 +173,7 @@ export const Networks = {
           rewardsAddress: '0x795BD26b99082E59478cfe8d9Cd207bb196808E4',
           oldRewardsAddress: '0x795BD26b99082E59478cfe8d9Cd207bb196808E4',
           liqudityUrl:
-            'https://linkswap.app/#/add/0x514910771AF9Ca656af840dff83E8264EcF986CA/0x910524678c0b1b23ffb9285a81f99c29c11cbaed',
+            'https://linkswap.app/#/add/0x514910771AF9Ca656af840dff83E8264EcF986CA/0x9ceb84f92a0561fa3cc4132ab9c0b76a59787544',
         },
       ],
     },
