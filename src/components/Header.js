@@ -98,4 +98,18 @@ export default styled(({ className }) => (
     display: inline-block;
     margin: 0 2.1rem;
   }
+  
+  @media (max-width: 430px) {
+    flex-wrap: wrap;
+    
+    > .account {
+      width: 100%;
+    }
+  
+    .header-link {
+      display: flex;
+      flex: 0 0 100%;
+      margin: 0 0 1rem;
+    }
+  }
 `;

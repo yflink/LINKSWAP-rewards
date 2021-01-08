@@ -188,7 +188,20 @@ const HasPosition = styled(({ address, className }) => {
       }
     }
   }
-
+  
+  @media (max-width: 770px) {
+    .panel-content {
+      flex-wrap: wrap;
+      > span {
+        display: flex;
+        flex: 0 0 100%;
+        width: 100%;
+        flex-direction: column;
+        margin-bottom: 2rem;
+      }
+    }
+  }
+  
   .button {
     margin-top: 1rem;
   }
@@ -399,17 +412,34 @@ export default styled(({ address, className, yfl }) => {
     background: #445363;
   }
 
-  // Block has been added to handle pool panel only if the browser size is 500px or less
   @media (max-width: 500px) {
-    .pool-name {
-      display: block !important;
-    }
-    .button-action // Hide arrows since the panel box is already clickable
-    {
-      display: none;
-    }
-    .suffix {
-      display: flex;
+    .pool-details {
+      flex-wrap: wrap;
+      .title-col {
+        display: flex;
+        flex: 0 0 100%;
+        justify-content: center;
+        width: 100%;
+        flex-wrap: wrap;
+        margin: 0 0 2em;
+      }    
+      
+      .pool-name {
+        width: 100%;
+      }
+      
+      .stats-group {
+        flex-wrap: wrap;
+        
+        > span {
+          width: 100%;
+          margin-left: 0; 
+        }
+      }
+      
+      .button-action, .lazyboi {
+        display: none;
+      }
     }
   }
 `;

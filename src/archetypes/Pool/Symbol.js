@@ -2,10 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { Pool } from '@archetypes';
 
+import AZUKI from '@token/AZUKI.png';
 import BUSD from '@token/BUSD.png';
 import CEL from '@token/CEL.png';
 import CFI from '@token/CFI.png';
 import DAI from '@token/DAI.png';
+import DOKI from '@token/DOKI.png';
 import DPI from '@token/DPI.png';
 import WETH from '@token/ETH.png';
 import GSWAP from '@token/GSWAP.png';
@@ -17,11 +19,13 @@ import YAX from '@token/YAX.png';
 import YFL from '@token/YFL.png';
 
 const symbolMappings = {
+  AZUKI,
   BUSD,
   CEL,
   CFi: CFI,
   DAI,
   DPI,
+  DOKI,
   WETH,
   GSWAP,
   LINK,

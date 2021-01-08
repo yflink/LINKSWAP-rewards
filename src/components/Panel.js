@@ -106,6 +106,23 @@ Panel.Content = styled(({ title, subtitle, children, className, ...props }) => (
   *:last-child {
     margin-bottom: 0;
   }
+  
+  @media (max-width: 770px) {
+    > p {
+      & + .button {
+        display: flex;
+        justify-content: center;
+        
+        *:first-child {
+          margin-left: 0;
+        }
+        
+        *:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
 `;
 
 Panel.Header = styled(({ children, className, ...rest }) => (

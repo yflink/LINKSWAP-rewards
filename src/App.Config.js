@@ -149,6 +149,32 @@ export const Networks = {
           liqudityUrl:
             'https://linkswap.app/#/add/0x514910771AF9Ca656af840dff83E8264EcF986CA/0x63b4f3e3fa4e438698CE330e365E831F7cCD1eF4',
         },
+        {
+          token0: {
+            currencyKey: 'link',
+          },
+          token1: {
+            currencyKey: 'azuki',
+          },
+          address: '0xB7Cd446a2a80d4770C6bECde661B659cFC55acf5',
+          rewardsAddress: '0xa74Ef3faB9E94578c79e0077f6Bd572C9efc8733',
+          oldRewardsAddress: '0x0000000000000000000000000000000000000000',
+          liqudityUrl:
+            'https://linkswap.app/#/add/0x514910771AF9Ca656af840dff83E8264EcF986CA/0x910524678c0b1b23ffb9285a81f99c29c11cbaed',
+        },
+        {
+          token0: {
+            currencyKey: 'link',
+          },
+          token1: {
+            currencyKey: 'doki',
+          },
+          address: '0xbe755C548D585dbc4e3Fe4bcD712a32Fd81e5Ba0',
+          rewardsAddress: '0x795BD26b99082E59478cfe8d9Cd207bb196808E4',
+          oldRewardsAddress: '0x0000000000000000000000000000000000000000',
+          liqudityUrl:
+            'https://linkswap.app/#/add/0x514910771AF9Ca656af840dff83E8264EcF986CA/0x910524678c0b1b23ffb9285a81f99c29c11cbaed',
+        },
       ],
     },
   },

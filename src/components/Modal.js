@@ -129,6 +129,22 @@ const Container = styled(({ className, ...rest }) => {
       transform: translate(-50%, -60%) scale(1);
     }
   }
+  
+  
+  @media (max-width: 770px) {
+    .modal {
+      .pool-name {
+        .pool-name-title {
+          font-size: 1em;
+        }
+      
+        .pool-symbol {
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+  }
 `;
 
 Container.open = (props) => document.querySelector('.modal-container')?.open(props);
