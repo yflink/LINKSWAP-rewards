@@ -16,7 +16,7 @@ const coinGeckoMapper = {
   yax: 'yaxis',
   cfi: 'cyberfi',
   azuki: 'azuki',
-  doki: 'doki',
+  doki: 'doki-doki-finance',
 };
 
 const useRate = (from, to) => {
