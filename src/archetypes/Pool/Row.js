@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import {
   Button,
@@ -12,7 +12,6 @@ import {
 import { Pool, Account } from '@archetypes';
 import { useBit } from '@util/hooks';
 import { units, format } from '@util/helpers';
-import { useConversion } from '@util/currencyConvert';
 import { ReactComponent as IconChevron } from '@icon/chevron_down.svg';
 import { ReactComponent as LogoYFLink } from '@logo/yflink.svg';
 import { ReactComponent as LogoMetaMask } from '@logo/metamask.svg';
@@ -60,11 +59,7 @@ const HasPosition = styled(({ address, className }) => {
 
   const position = usePosition(address);
   const pool = Pool.usePool(address);
-
-  //const fiat_balance = useConversion(units.fromWei(position?.balance), 'yflink', 'usd')
-  //const fiat_staked = useConversion(units.fromWei(position?.staked), 'yflink', 'usd')
-  //const fiat_rewards_yfl = useConversion(units.fromWei(position?.reward?.yfl), 'yflink', 'usd')
-  //const fiat_rewards_ert = useConversion(units.fromWei(position?.reward?.ert), 'yflink', 'usd')
+  const hasYFLRewards = pool?.reward?.yfl?.rate !== '0';
 
   return (
     <Panel className={className}>
@@ -125,7 +120,7 @@ const HasPosition = styled(({ address, className }) => {
           </Button>
         </span>
       )}
-      {pool?.address !== '0xf68c01198cDdEaFB9d2EA43368FC9fA509A339Fa' && ( // Do not show YFL for CFI/LINK pool
+      {hasYFLRewards && (
         <span>
           <Stat
             title='Unclaimed YFL'
@@ -272,6 +267,7 @@ export default styled(({ address, className, yfl }) => {
   const pool = Pool.usePool(address);
   const deposited = Pool.useDeposited(address);
   const stake = Pool.useUserStake(address);
+  const hasYFLRewards = pool?.reward?.yfl?.rate !== '0';
 
   return (
     <Panel className={`pool-row ${className}`} data-open={open}>
@@ -295,13 +291,15 @@ export default styled(({ address, className, yfl }) => {
           <span>
             <Stat title='Pool Rate'>
               <div>
-                <LazyBoi
-                  value={pool?.reward?.yfl?.rate}
-                  format={(val) =>
-                    format.decimals(units.fromWei(val) * 86400, 6)
-                  }
-                  suffix={<span className='suffix'> YFL/day</span>}
-                />
+                {hasYFLRewards && (
+                  <LazyBoi
+                    value={pool?.reward?.yfl?.rate}
+                    format={(val) =>
+                      format.decimals(units.fromWei(val) * 86400, 6)
+                    }
+                    suffix={<span className='suffix'> YFL/day</span>}
+                  />
+                )}
               </div>
               {pool?.reward?.ert && (
                 <div>
