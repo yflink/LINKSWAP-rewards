@@ -151,10 +151,10 @@ export const Networks = {
         },
         {
           token0: {
-            currencyKey: 'link',
+            currencyKey: 'azuki',
           },
           token1: {
-            currencyKey: 'azuki',
+            currencyKey: 'link',
           },
           address: '0xB7Cd446a2a80d4770C6bECde661B659cFC55acf5',
           rewardsAddress: '0xa74Ef3faB9E94578c79e0077f6Bd572C9efc8733',
@@ -164,10 +164,10 @@ export const Networks = {
         },
         {
           token0: {
-            currencyKey: 'link',
+            currencyKey: 'doki',
           },
           token1: {
-            currencyKey: 'doki',
+            currencyKey: 'link',
           },
           address: '0xbe755C548D585dbc4e3Fe4bcD712a32Fd81e5Ba0',
           rewardsAddress: '0x795BD26b99082E59478cfe8d9Cd207bb196808E4',

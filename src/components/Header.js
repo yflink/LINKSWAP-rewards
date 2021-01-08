@@ -99,6 +99,16 @@ export default styled(({ className }) => (
     margin: 0 2.1rem;
   }
   
+  @media (max-width: 840px) {
+    .links {
+      display: none;
+    }
+    
+    > .account {
+      width: 50%;
+    }
+  }
+  
   @media (max-width: 430px) {
     flex-wrap: wrap;
     
