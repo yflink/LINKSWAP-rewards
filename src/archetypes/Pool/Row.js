@@ -234,9 +234,9 @@ const UserPositionPanel = styled(({ address, open, className }) => {
     return !position ? (
       <LoadingPosition className={className} />
     ) : position?.balance > 0 ||
-      position?.staked > 0 ||
-      position?.reward?.yfl > 0 ||
-      position?.reward?.ert > 0 ? (
+    position?.staked > 0 ||
+    position?.reward?.yfl > 0 ||
+    position?.reward?.ert > 0 ? (
       <HasPosition address={address} className={className} />
     ) : (
       <NoPosition address={address} className={className} />
@@ -252,8 +252,8 @@ const UserPositionPanel = styled(({ address, open, className }) => {
   opacity: 1;
 
   ${({ open }) =>
-    !open &&
-    `
+  !open &&
+  `
 			max-height: 0rem;
 			padding: 0;
 			margin: 0;
@@ -267,13 +267,19 @@ export default styled(({ address, className, yfl }) => {
   const pool = Pool.usePool(address);
   const deposited = Pool.useDeposited(address);
   const stake = Pool.useUserStake(address);
+  const apy = Pool.useApy(address);
   const hasYFLRewards = pool?.reward?.yfl?.rate !== '0';
 
   return (
     <Panel className={`pool-row ${className}`} data-open={open}>
       <div className={'pool-details'} onClick={() => toggleOpen()}>
         <span className='title-col'>
-          <Pool.Name address={address} />
+          {Boolean(apy) ? (
+            <Pool.Name address={address} apy={'APY: ~'+format.decimals(apy, 2)+'%'}/>
+          ) : (
+            <Pool.Name address={address} />
+          )}
+
           <Stat inline small light className='countdown'>
             <Countdown prefix='Ends in: ' to={pool?.periodFinish} />
           </Stat>

@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import { units } from '@util/helpers';
+import { units, format } from '@util/helpers';
 import { useConversion } from '@util/currencyConvert';
 import { Transaction } from '@archetypes';
 import AppStore from '@app/App.Store';
-
 import { StakingRewards } from '@util/contracts';
 
 export const usePool = (address) => {
@@ -151,3 +150,36 @@ export const useClaimTransaction = ({ address, onSuccess }) => {
 
   return transaction;
 };
+
+export const useApy = (address) => {
+  const [data, setData] = useState();
+  const pool = usePool(address);
+  const deposited = useDeposited(address);
+  const yflRate = useConversion(1, 'yfl', 'usd');
+  const ertRate = useConversion(1, pool?.reward?.ert?.symbol, 'usd');
+  let totalDailyRewardValue = 0;
+  if(pool?.reward?.yfl?.rate > 0) {
+    const dailyYflReward = format.decimals(units.fromWei(pool?.reward?.yfl?.rate) * 86400, 2);
+    const dailyYflValue = dailyYflReward*yflRate;
+    totalDailyRewardValue += dailyYflValue;
+  }
+  if(pool?.reward?.ert?.rate > 0) {
+    const dailyErtReward = (pool?.reward?.ert?.symbol === 'CEL') ?
+      format.decimals((pool?.reward?.ert?.rate / 10000) * 86400, 2) :
+      format.decimals(units.fromWei(pool?.reward?.ert?.rate) * 86400, 2);
+    const dailyErtValue = dailyErtReward*ertRate;
+    totalDailyRewardValue += dailyErtValue;
+  }
+
+  useEffect(() => {
+    if (!!pool?.totalSupply && !!deposited) {
+      const yearlyRewardsValue = totalDailyRewardValue*365;
+      const perDepositedDollarYearlyReward = yearlyRewardsValue/deposited;
+      const apy = perDepositedDollarYearlyReward*100;
+      setData(apy);
+    }
+  }, [deposited, pool?.totalSupply]);
+
+  return data;
+};
+

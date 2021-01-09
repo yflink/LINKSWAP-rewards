@@ -2,13 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { Pool } from '@archetypes';
 
-export default styled(({ address, subtitle, className, ...rest }) => {
+export default styled(({ address, apy, subtitle, className, ...rest }) => {
   const pool = Pool.usePool(address);
 
   return (
     <div className={`pool-name ${className}`} {...rest}>
       <Pool.Symbol address={address} />
       <span>
+        {apy && <div className='pool-calculated-apy'>{apy}</div>}
         <div className='pool-name-title'>
           {pool?.token0?.symbol}
           <span>|</span>
@@ -24,6 +25,8 @@ export default styled(({ address, subtitle, className, ...rest }) => {
   border-radius: var(--theme--border-radius);
   font-size: var(--font-size-normal);
   width: 100%;
+  position: relative;
+
 
   .pool-symbol {
     margin-right: 0.4em;
@@ -34,6 +37,13 @@ export default styled(({ address, subtitle, className, ...rest }) => {
 
   > span {
     text-align: left;
+  }
+  
+  .pool-calculated-apy {
+    top: 5px;
+    right: 10px;
+    font-size: 1.2rem;
+    position: absolute;
   }
 
   .pool-name-title {
