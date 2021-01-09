@@ -163,7 +163,9 @@ export const useApy = (address) => {
   if(pool?.reward?.yfl?.rate > 0) {
     const dailyYflReward = format.decimals(units.fromWei(pool?.reward?.yfl?.rate) * 86400, 2);
     const dailyYflValue = dailyYflReward*yflRate;
-    totalDailyRewardValue += dailyYflValue;
+    if(dailyYflValue > 0) {
+      totalDailyRewardValue += dailyYflValue;
+    }
   }
   if(pool?.reward?.ert?.rate > 0) {
     const dailyErtReward = (pool?.reward?.ert?.symbol === 'CEL') ?
