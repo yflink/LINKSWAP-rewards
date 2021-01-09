@@ -57,7 +57,9 @@ export const useDeposited = (address) => {
           token1Rate * units.fromWei(pool?.token1?.balance || 0);
       }
 
-      setData(totalDeposited);
+      const totalStaked = (totalDeposited / pool?.totalSupply)*pool?.staked
+
+      setData(totalStaked);
     }
   }, [
     pool?.token0?.currencyKey,
