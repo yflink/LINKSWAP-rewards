@@ -170,7 +170,9 @@ export const useApy = (address) => {
       format.decimals((pool?.reward?.ert?.rate / 10000) * 86400, 2) :
       format.decimals(units.fromWei(pool?.reward?.ert?.rate) * 86400, 2);
     const dailyErtValue = dailyErtReward*ertRate;
-    totalDailyRewardValue += dailyErtValue;
+    if(dailyErtValue > 0) {
+      totalDailyRewardValue += dailyErtValue;
+    }
   }
 
   useEffect(() => {
