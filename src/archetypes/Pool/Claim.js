@@ -28,6 +28,17 @@ export default styled(({ address, ...props }) => {
     'usd'
   );
 
+  let rewards = false;
+  let rewardsSymbol = false;
+  if(position?.reward.ert) {
+    rewardsSymbol = pool?.reward?.ert?.symbol;
+    if(rewardsSymbol === 'CEL') {
+      rewards = position?.reward.ert / 10000;
+    } else {
+      rewards = units.fromWei(position?.reward.ert);
+    }
+  }
+
   return (
     <ModalTemplate address={address} {...props} title={'Claim Rewards'}>
       <Panel
@@ -36,14 +47,12 @@ export default styled(({ address, ...props }) => {
         subtitle='Available rewards to be claimed:'
       >
         <Fragment>
-          YFL: {units.fromWei(position?.reward.yfl)}
-          <br />
-          {position?.reward.ert &&
-            `${pool?.reward?.ert?.symbol}: ${units.fromWei(
-              position?.reward.ert
-            )}`}
+          {(position?.reward.yfl > 0) &&
+          `YFL: ${units.fromWei(position?.reward.yfl)}<br />`
+          }
+          {rewards &&
+            `${rewardsSymbol}: ${rewards}`}
         </Fragment>
-
         <Panel.Footer>{tx.controls}</Panel.Footer>
       </Panel>
 
