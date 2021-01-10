@@ -140,7 +140,7 @@ const HasPosition = styled(({ address, className }) => {
           </Button>
         </span>
       )}
-      {position?.reward?.ert && ( // Show MASQ as well as YFL for MASQ/ETH pool's reward
+      {pool?.reward?.ert?.symbol && (
         <span>
           <Stat
             title={`Unclaimed ${pool?.reward?.ert?.symbol}`}
